@@ -6,6 +6,7 @@ class CommPipes():
     def __init__(self, inQ = queue.Queue(), outQ = queue.Queue()):
         self.inQueue = inQ
         self.outQueue = outQ
+        self.finished = False
 
     def get(self):
         return self.inQueue.get()
@@ -17,7 +18,10 @@ class CommPipes():
         self.inQueue.put(e)
 
     def client_get(self):
-        return self.outQueue.get()
+        if self.finished and self.outQueue.empty():
+            return None
+        else:
+            return self.outQueue.get()
 
 
 class IntCode(threading.Thread):
@@ -54,7 +58,7 @@ class IntCode(threading.Thread):
 
             if op_code_base == 99:
                 pc += 1
-#                self.pipes.put(None)
+                self.pipes.finished = True
                 break
             elif op_code_base == 3:
                 self.memory[index0] = self.pipes.get()
