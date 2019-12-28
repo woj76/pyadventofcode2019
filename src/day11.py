@@ -7,7 +7,7 @@ program_code = [int(s) for s in open("data/data11.txt", "rt").readline().split('
 
 pipes = intcode.CommPipes()
 
-t = intcode.IntCode(program_code, pipes, mem_size = 4096)
+t = intcode.IntCode(program_code, pipes, mem_size = 2048)
 t.start()
 
 dirs = [(0,-1), (1,0), (0,1), (-1,0)]
