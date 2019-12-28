@@ -27,12 +27,11 @@ for c in program:
 
 while True:
     c = pipes.client_get()
-    if c == None:
-        break
     if c < 128:
         sys.stdout.write(chr(c))
     else:
         print(c)
+        break
 
 t.stop()
 t.join()

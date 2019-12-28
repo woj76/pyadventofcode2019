@@ -54,7 +54,7 @@ class IntCode(threading.Thread):
 
             if op_code_base == 99:
                 pc += 1
-                self.pipes.put(None)
+#                self.pipes.put(None)
                 break
             elif op_code_base == 3:
                 self.memory[index0] = self.pipes.get()
